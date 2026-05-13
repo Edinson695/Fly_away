@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: Fly_away
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: FLY_AWAY
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

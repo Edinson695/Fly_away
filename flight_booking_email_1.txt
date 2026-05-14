@@ -1,0 +1,5 @@
+=== CONFIRMACIÓN DE RESERVA ===
+Nombres: Miguel Villena
+Número de Vuelo: LAT123
+Fecha de Salida: 2026-05-15T08:30:00
+Fecha de Llegada: 2026-05-15T10:45:00

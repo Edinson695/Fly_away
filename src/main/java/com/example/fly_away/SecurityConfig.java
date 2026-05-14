@@ -56,10 +56,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                // 1. Desactivamos CSRF (necesario para APIs REST con Tokens)
+
                 .csrf(csrf -> csrf.disable())
 
-                // 2. Configuramos qué rutas son públicas y cuáles protegidas
                 .authorizeHttpRequests(authRequest ->
                         authRequest
                                 // AQUÍ ESTÁ LA MAGIA: Liberamos el registro y el login

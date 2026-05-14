@@ -7,6 +7,7 @@ import com.example.fly_away.Entity.User;
 import com.example.fly_away.Repository.BookingRepository;
 import com.example.fly_away.Repository.FlightRepository;
 import com.example.fly_away.Repository.UserRepository;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +19,17 @@ public class BookingService {
     private final UserRepository userRepository;
     private final FlightRepository flightRepository;
 
-    private final EmailService emailService;
+    private final NotificationService notificationService;
 
     public BookingService(BookingRepository bookingRepository, UserRepository userRepository,
-                          FlightRepository flightRepository,  EmailService emailService) {
+                          FlightRepository flightRepository, NotificationService notificationService) {
         this.bookingRepository = bookingRepository;
         this.userRepository = userRepository;
         this.flightRepository = flightRepository;
-        this.emailService = emailService;
+        this.notificationService = notificationService;
     }
 
     public Long bookFlight(BookingFlightRequest flightRequest){
-        // Esto saca el correo (email) guardado dentro del Token
         String emailDelUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
         User usuario = userRepository.findByEmail(emailDelUsuario).orElseThrow();
 
@@ -52,13 +52,9 @@ public class BookingService {
 
         booking = bookingRepository.save(booking);
         try {
-            emailService.sendBookingConfirmation(
-                    usuario.getEmail(),
-                    usuario.getName(),
-                    flight.getFlightNumber()
-            );
+            notificationService.sendBookingConfirmation(booking);
         } catch (Exception e) {
-            System.out.println("Error al enviar el email" + e.getMessage());
+            System.out.println("Error al generar el archivo txt: " + e.getMessage());
         }
 
         return booking.getId();

@@ -1,4 +1,4 @@
-package com.example.fly_away.Controller;
+package com.example.fly_away.DTO;
 
 public class LoginResquet {
     private String email;

@@ -17,10 +17,10 @@ public class BookingController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<Long> bookingFlight(@RequestBody BookingFlightRequest flightid) {
+    public ResponseEntity<?> bookingFlight(@RequestBody BookingFlightRequest flightid) {
         Long bookingId = bookingService.bookFlight(flightid);
 
-        return  ResponseEntity.ok(bookingId);
+        return  ResponseEntity.ok(java.util.Collections.singletonMap("Id", bookingId));
     }
 
     @GetMapping("/book/{id}")

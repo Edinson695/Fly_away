@@ -20,15 +20,13 @@ public class NotificationService {
             String salida = booking.getFlight().getDepartureTime().format(iso);
             String llegada = booking.getFlight().getArrivalTime().format(iso);
 
-            // Contenido del correo simulado
-            String content = "=== CONFIRMACIÓN DE RESERVA ===\n" +
+             String content = "=== CONFIRMACIÓN DE RESERVA ===\n" +
                     "Nombres: " + booking.getCustomerNames() + "\n" +
                     "Número de Vuelo: " + booking.getFlight().getFlightNumber() + "\n" +
                     "Fecha de Salida: " + salida + "\n" +
                     "Fecha de Llegada: " + llegada + "\n";
 
-            // Guardar el archivo
-            Files.writeString(filePath, content);
+             Files.writeString(filePath, content);
 
             System.out.println("Archivo generado: " + fileName);
         } catch (Exception e) {

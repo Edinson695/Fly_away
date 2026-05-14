@@ -23,8 +23,7 @@ public class JwtService {
     @Value("${jwt.expiration-refresh}")
     private Long refreshTokenExpiration;
 
-    //variables de entorno : "${nombre de la variable}"
-    private SecretKey getSigningKey() {
+     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
@@ -48,12 +47,10 @@ public class JwtService {
 
             return true;
         } catch (JwtException | IllegalArgumentException e) {
-            // Token is invalid or expired
-            return false;
+             return false;
         }
     }
-    //a la derecha, esta haciendo una pequeña investigacion
-    public String extractUsername(String token) {
+     public String extractUsername(String token) {
         return Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()

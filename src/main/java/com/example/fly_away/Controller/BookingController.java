@@ -20,7 +20,7 @@ public class BookingController {
     public ResponseEntity<?> bookingFlight(@RequestBody BookingFlightRequest flightid) {
         Long bookingId = bookingService.bookFlight(flightid);
 
-        return  ResponseEntity.ok(java.util.Collections.singletonMap("Id", bookingId));
+        return  ResponseEntity.ok(java.util.Collections.singletonMap("id", bookingId));
     }
 
     @GetMapping("/book/{id}")

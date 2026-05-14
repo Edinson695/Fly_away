@@ -24,12 +24,12 @@ public class FlightController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Long> createFlight(
+    public ResponseEntity<?> createFlight(
             @Valid @RequestBody FlightCreateRequest request){
 
         Long flightid = flightService.createFlight(request);
 
-        return ResponseEntity.ok(flightid);
+        return ResponseEntity.ok(java.util.Collections.singletonMap("id", flightid));
     }
 
     @GetMapping("/search")

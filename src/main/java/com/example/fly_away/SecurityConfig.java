@@ -20,15 +20,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
-    // Asumo que tienes un AuthenticationProvider configurado, si no lo tienes,
-    // coméntame y lo armamos rápido. Es vital para el AuthController.
-    //private final AuthenticationProvider authenticationProvider;
+
     private final UserRepository userRepository;
 
 
     public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter, /*AuthenticationProvider authenticationProvider,*/ UserRepository userRepository) {
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
-        //this.authenticationProvider = authenticationProvider;
+
         this.userRepository = userRepository;
     }
 
@@ -61,18 +59,18 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                // AQUÍ ESTÁ LA MAGIA: Liberamos el registro y el login
-                                .requestMatchers("/users/register", "/auth/login", "/error").permitAll()
-                                // Cualquier otra petición (como /flights/book) requerirá Token
+
+                                .requestMatchers("/users/register", "/auth/login", "/error","/cleanup",
+                                        "/flights/create").permitAll()
+
                                 .anyRequest().authenticated()
                 )
 
-                // 3. Le decimos que no guarde sesiones en memoria (porque usamos Tokens)
                 .sessionManagement(sessionManager ->
                         sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
-                // 4. Agregamos el proveedor y tu filtro JWT
+
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
 

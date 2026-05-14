@@ -20,9 +20,11 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest request){
-        Long userid = userService.registerUser(request);
-
-        return ResponseEntity.ok(userid);
-
+        try {
+            Long userid = userService.registerUser(request);
+            return ResponseEntity.ok(userid);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

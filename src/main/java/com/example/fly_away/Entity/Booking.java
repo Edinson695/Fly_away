@@ -32,6 +32,5 @@ public class Booking {
 
     private LocalDateTime bookingDate;
 
-    public void set() {
-    }
+
 }

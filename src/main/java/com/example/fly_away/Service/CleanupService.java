@@ -21,12 +21,9 @@ public class CleanupService {
 
     @Transactional
     public void cleanAll() {
-        // ¡EL ORDEN ES VITAL!
-        // 1. Primero borramos la tabla hija (Booking)
-        bookingRepository.deleteAll();
+         bookingRepository.deleteAll();
 
-        // 2. Luego ya podemos borrar las tablas padre (Flights y Users)
-        flightRepository.deleteAll();
+         flightRepository.deleteAll();
         userRepository.deleteAll();
     }
 }

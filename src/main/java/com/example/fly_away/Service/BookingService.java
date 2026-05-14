@@ -7,7 +7,6 @@ import com.example.fly_away.Entity.User;
 import com.example.fly_away.Repository.BookingRepository;
 import com.example.fly_away.Repository.FlightRepository;
 import com.example.fly_away.Repository.UserRepository;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
